@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════
-   ResumeForge — script.js
+   ResumeCraft — script.js
    Vanilla JS — Zero dependencies
    ═══════════════════════════════════════════════════════ */
 
