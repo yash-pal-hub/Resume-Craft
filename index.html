@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ResumeForge — Professional Resume Builder</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="brand-icon">&#9998;</span> Resume<span class="brand-accent">Forge</span>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-nav" id="btnThemeToggle" title="Toggle Dark/Light">&#9790;</button>
+      <button class="btn-nav btn-primary" id="btnPrint" title="Download / Print Resume">&#8681; Download PDF</button>
+    </div>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <h1>Build Your <span class="text-gradient">Professional Resume</span></h1>
+      <p>Fill in your details below and watch your resume come to life in real-time. Download it as a PDF when you're ready.</p>
+      <a href="#builder" class="btn-hero">Start Building &darr;</a>
+    </div>
+    <div class="hero-visual">
+      <div class="floating-card fc1"></div>
+      <div class="floating-card fc2"></div>
+      <div class="floating-card fc3"></div>
+    </div>
+  </section>
+
+  <!-- ===================== BUILDER ===================== -->
+  <section class="builder" id="builder">
+    <div class="builder-grid">
+
+      <!-- ===== LEFT: FORM PANEL ===== -->
+      <div class="form-panel">
+        <h2 class="panel-title">Your Details</h2>
+
+        <!-- Stepper Tabs -->
+        <div class="stepper">
+          <button class="step-btn active" data-step="1"><span class="step-num">1</span> Personal</button>
+          <button class="step-btn" data-step="2"><span class="step-num">2</span> Experience</button>
+          <button class="step-btn" data-step="3"><span class="step-num">3</span> Education</button>
+          <button class="step-btn" data-step="4"><span class="step-num">4</span> Skills</button>
+          <button class="step-btn" data-step="5"><span class="step-num">5</span> Projects</button>
+          <button class="step-btn" data-step="6"><span class="step-num">6</span> Extras</button>
+        </div>
+
+        <!-- Step 1: Personal Info -->
+        <div class="step-content active" data-step="1">
+          <div class="form-group">
+            <label for="fullName">Full Name *</label>
+            <input type="text" id="fullName" placeholder="e.g. Yash Pal" />
+          </div>
+          <div class="form-group">
+            <label for="jobTitle">Job Title / Headline</label>
+            <input type="text" id="jobTitle" placeholder="e.g. Full Stack Developer" />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" placeholder="you@email.com" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" placeholder="+91 98765 43210" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="location">Location</label>
+              <input type="text" id="location" placeholder="e.g. New Delhi, India" />
+            </div>
+            <div class="form-group">
+              <label for="website">Website / Portfolio</label>
+              <input type="url" id="website" placeholder="https://yoursite.com" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="linkedin">LinkedIn</label>
+              <input type="url" id="linkedin" placeholder="https://linkedin.com/in/you" />
+            </div>
+            <div class="form-group">
+              <label for="github">GitHub</label>
+              <input type="url" id="github" placeholder="https://github.com/you" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="summary">Professional Summary</label>
+            <textarea id="summary" rows="4" placeholder="A brief 2-3 sentence summary of your professional background, key skills, and career goals..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="photoUpload">Profile Photo (optional)</label>
+            <input type="file" id="photoUpload" accept="image/*" />
+            <div id="photoPreviewWrap" class="photo-preview-wrap" style="display:none;">
+              <img id="photoPreview" alt="Profile preview" />
+              <button type="button" id="removePhoto" class="btn-remove-photo" title="Remove photo">&times;</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Experience -->
+        <div class="step-content" data-step="2">
+          <div id="experienceList" class="repeater-list"></div>
+          <button class="btn-add" id="addExperience">+ Add Experience</button>
+        </div>
+
+        <!-- Step 3: Education -->
+        <div class="step-content" data-step="3">
+          <div id="educationList" class="repeater-list"></div>
+          <button class="btn-add" id="addEducation">+ Add Education</button>
+        </div>
+
+        <!-- Step 4: Skills -->
+        <div class="step-content" data-step="4">
+          <div class="form-group">
+            <label for="skillInput">Add Skills</label>
+            <div class="tag-input-wrap">
+              <div class="tags-container" id="skillTags"></div>
+              <input type="text" id="skillInput" placeholder="Type a skill & press Enter" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="languageInput">Languages</label>
+            <div class="tag-input-wrap">
+              <div class="tags-container" id="languageTags"></div>
+              <input type="text" id="languageInput" placeholder="e.g. English (Fluent), Hindi (Native)" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5: Projects -->
+        <div class="step-content" data-step="5">
+          <div id="projectList" class="repeater-list"></div>
+          <button class="btn-add" id="addProject">+ Add Project</button>
+        </div>
+
+        <!-- Step 6: Extras -->
+        <div class="step-content" data-step="6">
+          <div class="form-group">
+            <label for="certInput">Certifications</label>
+            <div class="tag-input-wrap">
+              <div class="tags-container" id="certTags"></div>
+              <input type="text" id="certInput" placeholder="Type a certification & press Enter" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="interestInput">Interests / Hobbies</label>
+            <div class="tag-input-wrap">
+              <div class="tags-container" id="interestTags"></div>
+              <input type="text" id="interestInput" placeholder="Type an interest & press Enter" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Resume Template</label>
+            <div class="template-picker">
+              <button class="tmpl-btn active" data-template="classic">Classic</button>
+              <button class="tmpl-btn" data-template="modern">Modern</button>
+              <button class="tmpl-btn" data-template="minimal">Minimal</button>
+              <button class="tmpl-btn" data-template="bold">Bold</button>
+              <button class="tmpl-btn" data-template="executive">Executive</button>
+              <button class="tmpl-btn" data-template="creative">Creative</button>
+              <button class="tmpl-btn" data-template="compact">Compact</button>
+              <button class="tmpl-btn" data-template="timeline">Timeline</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Accent Color</label>
+            <div class="color-picker">
+              <button class="color-dot active" data-color="#2563eb" style="background:#2563eb;" title="Blue"></button>
+              <button class="color-dot" data-color="#7c3aed" style="background:#7c3aed;" title="Purple"></button>
+              <button class="color-dot" data-color="#059669" style="background:#059669;" title="Green"></button>
+              <button class="color-dot" data-color="#dc2626" style="background:#dc2626;" title="Red"></button>
+              <button class="color-dot" data-color="#d97706" style="background:#d97706;" title="Amber"></button>
+              <button class="color-dot" data-color="#0891b2" style="background:#0891b2;" title="Cyan"></button>
+              <button class="color-dot" data-color="#374151" style="background:#374151;" title="Slate"></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step Navigation -->
+        <div class="step-nav">
+          <button class="btn-step btn-prev" id="btnPrev" disabled>&larr; Previous</button>
+          <button class="btn-step btn-next" id="btnNext">Next &rarr;</button>
+        </div>
+      </div>
+
+      <!-- ===== RIGHT: LIVE PREVIEW ===== -->
+      <div class="preview-panel">
+        <div class="preview-toolbar">
+          <h2 class="panel-title">Live Preview</h2>
+          <button class="btn-nav btn-primary" id="btnPrint2">&#8681; Download PDF</button>
+        </div>
+        <div class="preview-scroll">
+          <div class="resume-page" id="resumePage">
+
+            <!-- CLASSIC TEMPLATE -->
+            <div class="resume-tpl resume-classic active" id="tplClassic">
+              <header class="rc-header">
+                <div class="rc-header-left">
+                  <img id="rc-photo" class="rc-photo" src="" alt="" style="display:none;" />
+                  <div>
+                    <h1 class="rc-name" id="rc-name">Your Name</h1>
+                    <p class="rc-title" id="rc-title">Your Job Title</p>
+                  </div>
+                </div>
+                <div class="rc-contact" id="rc-contact"></div>
+              </header>
+              <div class="rc-body">
+                <section class="rc-section" id="rc-summary-sec" style="display:none;">
+                  <h2 class="rc-sec-title">Professional Summary</h2>
+                  <p class="rc-summary-text" id="rc-summary"></p>
+                </section>
+                <section class="rc-section" id="rc-exp-sec" style="display:none;">
+                  <h2 class="rc-sec-title">Experience</h2>
+                  <div id="rc-exp"></div>
+                </section>
+                <section class="rc-section" id="rc-edu-sec" style="display:none;">
+                  <h2 class="rc-sec-title">Education</h2>
+                  <div id="rc-edu"></div>
+                </section>
+                <section class="rc-section" id="rc-skills-sec" style="display:none;">
+                  <h2 class="rc-sec-title">Skills</h2>
+                  <div class="rc-tags" id="rc-skills"></div>
+                </section>
+                <section class="rc-section" id="rc-projects-sec" style="display:none;">
+                  <h2 class="rc-sec-title">Projects</h2>
+                  <div id="rc-projects"></div>
+                </section>
+                <section class="rc-section" id="rc-certs-sec" style="display:none;">
+                  <h2 class="rc-sec-title">Certifications</h2>
+                  <div class="rc-tags" id="rc-certs"></div>
+                </section>
+                <section class="rc-section" id="rc-langs-sec" style="display:none;">
+                  <h2 class="rc-sec-title">Languages</h2>
+                  <div class="rc-tags" id="rc-langs"></div>
+                </section>
+                <section class="rc-section" id="rc-interests-sec" style="display:none;">
+                  <h2 class="rc-sec-title">Interests</h2>
+                  <div class="rc-tags" id="rc-interests"></div>
+                </section>
+              </div>
+            </div>
+
+            <!-- MODERN TEMPLATE -->
+            <div class="resume-tpl resume-modern" id="tplModern">
+              <aside class="rm-sidebar">
+                <img id="rm-photo" class="rm-photo" src="" alt="" style="display:none;" />
+                <h1 class="rm-name" id="rm-name">Your Name</h1>
+                <p class="rm-title" id="rm-title">Your Job Title</p>
+                <div class="rm-contact" id="rm-contact"></div>
+                <div class="rm-side-section" id="rm-skills-sec" style="display:none;">
+                  <h3 class="rm-side-heading">Skills</h3>
+                  <div class="rm-tags" id="rm-skills"></div>
+                </div>
+                <div class="rm-side-section" id="rm-langs-sec" style="display:none;">
+                  <h3 class="rm-side-heading">Languages</h3>
+                  <div class="rm-tags" id="rm-langs"></div>
+                </div>
+                <div class="rm-side-section" id="rm-interests-sec" style="display:none;">
+                  <h3 class="rm-side-heading">Interests</h3>
+                  <div class="rm-tags" id="rm-interests"></div>
+                </div>
+              </aside>
+              <main class="rm-main">
+                <section class="rm-section" id="rm-summary-sec" style="display:none;">
+                  <h2 class="rm-sec-title">About Me</h2>
+                  <p class="rm-summary-text" id="rm-summary"></p>
+                </section>
+                <section class="rm-section" id="rm-exp-sec" style="display:none;">
+                  <h2 class="rm-sec-title">Experience</h2>
+                  <div id="rm-exp"></div>
+                </section>
+                <section class="rm-section" id="rm-edu-sec" style="display:none;">
+                  <h2 class="rm-sec-title">Education</h2>
+                  <div id="rm-edu"></div>
+                </section>
+                <section class="rm-section" id="rm-projects-sec" style="display:none;">
+                  <h2 class="rm-sec-title">Projects</h2>
+                  <div id="rm-projects"></div>
+                </section>
+                <section class="rm-section" id="rm-certs-sec" style="display:none;">
+                  <h2 class="rm-sec-title">Certifications</h2>
+                  <div class="rm-tags" id="rm-certs"></div>
+                </section>
+              </main>
+            </div>
+
+            <!-- MINIMAL TEMPLATE -->
+            <div class="resume-tpl resume-minimal" id="tplMinimal">
+              <header class="rmin-header">
+                <img id="rmin-photo" class="rmin-photo" src="" alt="" style="display:none;" />
+                <h1 class="rmin-name" id="rmin-name">Your Name</h1>
+                <p class="rmin-title" id="rmin-title">Your Job Title</p>
+                <div class="rmin-contact" id="rmin-contact"></div>
+              </header>
+              <div class="rmin-body">
+                <section class="rmin-section" id="rmin-summary-sec" style="display:none;">
+                  <h2 class="rmin-sec-title">Summary</h2>
+                  <p class="rmin-summary-text" id="rmin-summary"></p>
+                </section>
+                <section class="rmin-section" id="rmin-exp-sec" style="display:none;">
+                  <h2 class="rmin-sec-title">Experience</h2>
+                  <div id="rmin-exp"></div>
+                </section>
+                <section class="rmin-section" id="rmin-edu-sec" style="display:none;">
+                  <h2 class="rmin-sec-title">Education</h2>
+                  <div id="rmin-edu"></div>
+                </section>
+                <section class="rmin-section" id="rmin-skills-sec" style="display:none;">
+                  <h2 class="rmin-sec-title">Skills</h2>
+                  <div class="rmin-tags" id="rmin-skills"></div>
+                </section>
+                <section class="rmin-section" id="rmin-projects-sec" style="display:none;">
+                  <h2 class="rmin-sec-title">Projects</h2>
+                  <div id="rmin-projects"></div>
+                </section>
+                <section class="rmin-section" id="rmin-certs-sec" style="display:none;">
+                  <h2 class="rmin-sec-title">Certifications</h2>
+                  <div class="rmin-tags" id="rmin-certs"></div>
+                </section>
+                <section class="rmin-section" id="rmin-langs-sec" style="display:none;">
+                  <h2 class="rmin-sec-title">Languages</h2>
+                  <div class="rmin-tags" id="rmin-langs"></div>
+                </section>
+                <section class="rmin-section" id="rmin-interests-sec" style="display:none;">
+                  <h2 class="rmin-sec-title">Interests</h2>
+                  <div class="rmin-tags" id="rmin-interests"></div>
+                </section>
+              </div>
+            </div>
+
+            <!-- BOLD TEMPLATE (Big fonts, spacious) -->
+            <div class="resume-tpl resume-bold" id="tplBold">
+              <header class="rb-header">
+                <img id="rb-photo" class="rb-photo" src="" alt="" style="display:none;" />
+                <h1 class="rb-name" id="rb-name">Your Name</h1>
+                <p class="rb-title" id="rb-title">Your Job Title</p>
+                <div class="rb-contact" id="rb-contact"></div>
+              </header>
+              <div class="rb-body">
+                <section class="rb-section" id="rb-summary-sec" style="display:none;">
+                  <h2 class="rb-sec-title">Summary</h2>
+                  <p class="rb-summary-text" id="rb-summary"></p>
+                </section>
+                <section class="rb-section" id="rb-exp-sec" style="display:none;">
+                  <h2 class="rb-sec-title">Experience</h2>
+                  <div id="rb-exp"></div>
+                </section>
+                <section class="rb-section" id="rb-edu-sec" style="display:none;">
+                  <h2 class="rb-sec-title">Education</h2>
+                  <div id="rb-edu"></div>
+                </section>
+                <section class="rb-section" id="rb-skills-sec" style="display:none;">
+                  <h2 class="rb-sec-title">Skills</h2>
+                  <div class="rb-tags" id="rb-skills"></div>
+                </section>
+                <section class="rb-section" id="rb-projects-sec" style="display:none;">
+                  <h2 class="rb-sec-title">Projects</h2>
+                  <div id="rb-projects"></div>
+                </section>
+                <section class="rb-section" id="rb-certs-sec" style="display:none;">
+                  <h2 class="rb-sec-title">Certifications</h2>
+                  <div class="rb-tags" id="rb-certs"></div>
+                </section>
+                <section class="rb-section" id="rb-langs-sec" style="display:none;">
+                  <h2 class="rb-sec-title">Languages</h2>
+                  <div class="rb-tags" id="rb-langs"></div>
+                </section>
+                <section class="rb-section" id="rb-interests-sec" style="display:none;">
+                  <h2 class="rb-sec-title">Interests</h2>
+                  <div class="rb-tags" id="rb-interests"></div>
+                </section>
+              </div>
+            </div>
+
+            <!-- EXECUTIVE TEMPLATE (Dark premium) -->
+            <div class="resume-tpl resume-executive" id="tplExecutive">
+              <header class="rex-header">
+                <img id="rex-photo" class="rex-photo" src="" alt="" style="display:none;" />
+                <div class="rex-header-content">
+                  <h1 class="rex-name" id="rex-name">Your Name</h1>
+                  <p class="rex-title" id="rex-title">Your Job Title</p>
+                </div>
+                <div class="rex-contact" id="rex-contact"></div>
+              </header>
+              <div class="rex-body">
+                <section class="rex-section" id="rex-summary-sec" style="display:none;">
+                  <h2 class="rex-sec-title">Executive Summary</h2>
+                  <p class="rex-summary-text" id="rex-summary"></p>
+                </section>
+                <section class="rex-section" id="rex-exp-sec" style="display:none;">
+                  <h2 class="rex-sec-title">Professional Experience</h2>
+                  <div id="rex-exp"></div>
+                </section>
+                <section class="rex-section" id="rex-edu-sec" style="display:none;">
+                  <h2 class="rex-sec-title">Education</h2>
+                  <div id="rex-edu"></div>
+                </section>
+                <section class="rex-section" id="rex-skills-sec" style="display:none;">
+                  <h2 class="rex-sec-title">Core Competencies</h2>
+                  <div class="rex-tags" id="rex-skills"></div>
+                </section>
+                <section class="rex-section" id="rex-projects-sec" style="display:none;">
+                  <h2 class="rex-sec-title">Notable Projects</h2>
+                  <div id="rex-projects"></div>
+                </section>
+                <section class="rex-section" id="rex-certs-sec" style="display:none;">
+                  <h2 class="rex-sec-title">Certifications</h2>
+                  <div class="rex-tags" id="rex-certs"></div>
+                </section>
+                <section class="rex-section" id="rex-langs-sec" style="display:none;">
+                  <h2 class="rex-sec-title">Languages</h2>
+                  <div class="rex-tags" id="rex-langs"></div>
+                </section>
+              </div>
+            </div>
+
+            <!-- CREATIVE TEMPLATE (Two-tone split) -->
+            <div class="resume-tpl resume-creative" id="tplCreative">
+              <div class="rcr-container">
+                <aside class="rcr-left">
+                  <img id="rcr-photo" class="rcr-photo" src="" alt="" style="display:none;" />
+                  <h1 class="rcr-name" id="rcr-name">Your Name</h1>
+                  <p class="rcr-title" id="rcr-title">Your Job Title</p>
+                  <div class="rcr-contact" id="rcr-contact"></div>
+                  <section class="rcr-side-sec" id="rcr-skills-sec" style="display:none;">
+                    <h3 class="rcr-side-title">Skills</h3>
+                    <div class="rcr-tags" id="rcr-skills"></div>
+                  </section>
+                  <section class="rcr-side-sec" id="rcr-langs-sec" style="display:none;">
+                    <h3 class="rcr-side-title">Languages</h3>
+                    <div class="rcr-tags" id="rcr-langs"></div>
+                  </section>
+                </aside>
+                <main class="rcr-right">
+                  <section class="rcr-section" id="rcr-summary-sec" style="display:none;">
+                    <h2 class="rcr-sec-title">About</h2>
+                    <p class="rcr-summary-text" id="rcr-summary"></p>
+                  </section>
+                  <section class="rcr-section" id="rcr-exp-sec" style="display:none;">
+                    <h2 class="rcr-sec-title">Experience</h2>
+                    <div id="rcr-exp"></div>
+                  </section>
+                  <section class="rcr-section" id="rcr-edu-sec" style="display:none;">
+                    <h2 class="rcr-sec-title">Education</h2>
+                    <div id="rcr-edu"></div>
+                  </section>
+                  <section class="rcr-section" id="rcr-projects-sec" style="display:none;">
+                    <h2 class="rcr-sec-title">Projects</h2>
+                    <div id="rcr-projects"></div>
+                  </section>
+                  <section class="rcr-section" id="rcr-certs-sec" style="display:none;">
+                    <h2 class="rcr-sec-title">Certifications</h2>
+                    <div class="rcr-tags" id="rcr-certs"></div>
+                  </section>
+                  <section class="rcr-section" id="rcr-interests-sec" style="display:none;">
+                    <h2 class="rcr-sec-title">Interests</h2>
+                    <div class="rcr-tags" id="rcr-interests"></div>
+                  </section>
+                </main>
+              </div>
+            </div>
+
+            <!-- COMPACT TEMPLATE (ATS-friendly, dense) -->
+            <div class="resume-tpl resume-compact" id="tplCompact">
+              <header class="rcp-header">
+                <h1 class="rcp-name" id="rcp-name">Your Name</h1>
+                <p class="rcp-title" id="rcp-title">Your Job Title</p>
+                <div class="rcp-contact" id="rcp-contact"></div>
+              </header>
+              <div class="rcp-body">
+                <section class="rcp-section" id="rcp-summary-sec" style="display:none;">
+                  <h2 class="rcp-sec-title">Summary</h2>
+                  <p class="rcp-summary-text" id="rcp-summary"></p>
+                </section>
+                <section class="rcp-section" id="rcp-exp-sec" style="display:none;">
+                  <h2 class="rcp-sec-title">Experience</h2>
+                  <div id="rcp-exp"></div>
+                </section>
+                <section class="rcp-section" id="rcp-edu-sec" style="display:none;">
+                  <h2 class="rcp-sec-title">Education</h2>
+                  <div id="rcp-edu"></div>
+                </section>
+                <section class="rcp-section" id="rcp-skills-sec" style="display:none;">
+                  <h2 class="rcp-sec-title">Skills</h2>
+                  <div class="rcp-tags" id="rcp-skills"></div>
+                </section>
+                <section class="rcp-section" id="rcp-projects-sec" style="display:none;">
+                  <h2 class="rcp-sec-title">Projects</h2>
+                  <div id="rcp-projects"></div>
+                </section>
+                <section class="rcp-section" id="rcp-certs-sec" style="display:none;">
+                  <h2 class="rcp-sec-title">Certifications</h2>
+                  <div class="rcp-tags" id="rcp-certs"></div>
+                </section>
+                <section class="rcp-section" id="rcp-langs-sec" style="display:none;">
+                  <h2 class="rcp-sec-title">Languages</h2>
+                  <div class="rcp-tags" id="rcp-langs"></div>
+                </section>
+              </div>
+            </div>
+
+            <!-- TIMELINE TEMPLATE (Vertical timeline with dots) -->
+            <div class="resume-tpl resume-timeline" id="tplTimeline">
+              <header class="rtl-header">
+                <img id="rtl-photo" class="rtl-photo" src="" alt="" style="display:none;" />
+                <h1 class="rtl-name" id="rtl-name">Your Name</h1>
+                <p class="rtl-title" id="rtl-title">Your Job Title</p>
+                <div class="rtl-contact" id="rtl-contact"></div>
+              </header>
+              <div class="rtl-body">
+                <section class="rtl-section" id="rtl-summary-sec" style="display:none;">
+                  <h2 class="rtl-sec-title">Summary</h2>
+                  <p class="rtl-summary-text" id="rtl-summary"></p>
+                </section>
+                <section class="rtl-section" id="rtl-exp-sec" style="display:none;">
+                  <h2 class="rtl-sec-title">Experience</h2>
+                  <div class="rtl-timeline" id="rtl-exp"></div>
+                </section>
+                <section class="rtl-section" id="rtl-edu-sec" style="display:none;">
+                  <h2 class="rtl-sec-title">Education</h2>
+                  <div class="rtl-timeline" id="rtl-edu"></div>
+                </section>
+                <section class="rtl-section" id="rtl-skills-sec" style="display:none;">
+                  <h2 class="rtl-sec-title">Skills</h2>
+                  <div class="rtl-tags" id="rtl-skills"></div>
+                </section>
+                <section class="rtl-section" id="rtl-projects-sec" style="display:none;">
+                  <h2 class="rtl-sec-title">Projects</h2>
+                  <div id="rtl-projects"></div>
+                </section>
+                <section class="rtl-section" id="rtl-certs-sec" style="display:none;">
+                  <h2 class="rtl-sec-title">Certifications</h2>
+                  <div class="rtl-tags" id="rtl-certs"></div>
+                </section>
+                <section class="rtl-section" id="rtl-langs-sec" style="display:none;">
+                  <h2 class="rtl-sec-title">Languages</h2>
+                  <div class="rtl-tags" id="rtl-langs"></div>
+                </section>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <p>&copy; 2026 ResumeForge &mdash; Built with vanilla HTML, CSS & JS.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
