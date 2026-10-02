@@ -17,7 +17,7 @@
 
 ## 📖 About
 
-ResumeForge is a fully functional, production-ready web application that lets you create professional resumes directly in your browser. Built entirely with **vanilla HTML, CSS, and JavaScript** — no React, no Bootstrap, no Tailwind, no CDNs. Just three clean files that work out of the box.
+ResumeCraft is a fully functional, production-ready web application that lets you create professional resumes directly in your browser. Built entirely with **vanilla HTML, CSS, and JavaScript** — no React, no Bootstrap, no Tailwind, no CDNs. Just three clean files that work out of the box.
 
 Fill in your details through a guided 6-step form, watch your resume come to life in real-time, customize the look, and download it as a PDF. It's that simple.
 
