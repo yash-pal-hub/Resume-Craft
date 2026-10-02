@@ -1,4 +1,4 @@
-# ✏️ ResumeForge — Professional Resume Builder
+# ✏️ ResumeCraft — Professional Resume Builder
 
 <div align="center">
 
