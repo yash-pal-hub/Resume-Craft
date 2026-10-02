@@ -1,4 +1,4 @@
-# 🎨 ResumeForge — 8 Professional Templates
+# 🎨 ResumeCraft — 8 Professional Templates
 
 Your resume builder now includes **8 distinct templates**, each optimized for different industries and preferences.
 
