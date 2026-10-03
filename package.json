@@ -4,8 +4,7 @@
   "description": "Professional Resume Builder",
   "private": true,
   "scripts": {
-    "dev": "npx http-server -p 3000",
-    "build": "echo 'No build required for static HTML project'"
+    "dev": "npx http-server -p 3000"
   },
   "keywords": [
     "resume",
