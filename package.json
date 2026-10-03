@@ -1,0 +1,20 @@
+{
+  "name": "resumecraft",
+  "version": "1.0.0",
+  "description": "Professional Resume Builder",
+  "private": true,
+  "scripts": {
+    "dev": "npx http-server -p 3000",
+    "build": "echo 'No build required for static HTML project'"
+  },
+  "keywords": [
+    "resume",
+    "builder",
+    "cv"
+  ],
+  "author": "Yash Pal",
+  "license": "MIT",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
+}
